@@ -21,7 +21,7 @@ It runs via **GitHub Actions**, so you can trigger it manually or schedule it to
 | Variable | Description | Required | Example |
 |-----------|-------------|-----------|----------|
 | `TELEGRAM_API_ID` | Telegram API ID | ✅ | `123456` |
-| `TELEGRAM__API_HASH` | Telegram API hash (**double underscore**) | ✅ | `abcdef123456...` |
+| `TELEGRAM_API_HASH` | Telegram API hash (**double underscore**) | ✅ | `abcdef123456...` |
 | `TELEGRAM_SESSION_STRING` | Your Telethon StringSession | ✅ | `1AAgA...` |
 | `DRY_RUN` | `1` → simulation only (no deletion) | ❌ | `1` |
 | `CHUNK_SIZE` | Number of messages deleted per batch | ❌ | `100` |
@@ -37,7 +37,7 @@ It runs via **GitHub Actions**, so you can trigger it manually or schedule it to
 1. Fork or clone this repository.  
 2. Add the following **repository secrets** in GitHub:  
    - `TELEGRAM_API_ID`  
-   - `TELEGRAM__API_HASH`  
+   - `TELEGRAM_API_HASH`  
    - `TELEGRAM_SESSION_STRING`  
 3. (Optional) Add extra environment variables like `DRY_RUN`, `CHUNK_SIZE`, or `DELAY_BETWEEN_CHUNKS`.  
 4. Go to **Actions → Delete Telegram messages → Run workflow** and trigger it manually.
