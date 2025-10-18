@@ -3,7 +3,7 @@
 delete_telegram_messages.py
 
 - TELEGRAM_API_ID            (required, int)
-- TELEGRAM__API_HASH         (required, str)   <- dikkat: çift alt çizgi adını sen verdiğin gibi kullanıyorum
+- TELEGRAM_API_HASH         (required, str)   <- dikkat: çift alt çizgi adını sen verdiğin gibi kullanıyorum
 - TELEGRAM_SESSION_STRING    (required, str)   <- Telethon StringSession
 Optional env:
 - DRY_RUN                    (if "1" -> do not actually delete, just report)
@@ -23,7 +23,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(me
 async def main():
     # env
     api_id = int(os.environ["TELEGRAM_API_ID"])
-    api_hash = os.environ["TELEGRAM__API_HASH"]
+    api_hash = os.environ["TELEGRAM_API_HASH"]
     session_str = os.environ["TELEGRAM_SESSION_STRING"]
     DRY_RUN = os.environ.get("DRY_RUN", "0") == "1"
     CHUNK_SIZE = int(os.environ.get("CHUNK_SIZE", "100"))
