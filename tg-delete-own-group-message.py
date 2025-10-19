@@ -3,7 +3,7 @@
 delete_telegram_messages.py
 
 - TELEGRAM_API_ID            (required, int)
-- TELEGRAM_API_HASH         (required, str)   <- dikkat: çift alt çizgi adını sen verdiğin gibi kullanıyorum
+- TELEGRAM_API_HASH         (required, str)   <- Attention: I use the double underscore name as you gave it
 - TELEGRAM_SESSION_STRING    (required, str)   <- Telethon StringSession
 Optional env:
 - DRY_RUN                    (if "1" -> do not actually delete, just report)
@@ -21,7 +21,6 @@ from telethon.tl.types import Channel, Chat
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
 async def main():
-    # env
     api_id = int(os.environ["TELEGRAM_API_ID"])
     api_hash = os.environ["TELEGRAM_API_HASH"]
     session_str = os.environ["TELEGRAM_SESSION_STRING"]
@@ -41,7 +40,6 @@ async def main():
         async for dialog in client.iter_dialogs():
             entity = dialog.entity
 
-            # treat as "group" if it's a Chat OR a Channel with megagroup=True (supergroup)
             is_group = isinstance(entity, Chat) or (isinstance(entity, Channel) and getattr(entity, "megagroup", False))
             if not is_group:
                 continue
@@ -52,7 +50,6 @@ async def main():
             buffer_ids = []
             found_in_chat = 0
 
-            # iterate only messages from this user
             async for msg in client.iter_messages(entity, from_user=my_id):
                 found_in_chat += 1
                 buffer_ids.append(msg.id)
@@ -76,7 +73,6 @@ async def main():
                     buffer_ids = []
                     await asyncio.sleep(DELAY)
 
-            # leftover
             if buffer_ids:
                 total_found += len(buffer_ids)
                 if DRY_RUN:
