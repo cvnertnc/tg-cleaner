@@ -109,6 +109,13 @@ async def delete_my_messages_all_groups(client, mode, limit):
             continue
 
         chat_title = getattr(entity, "title", str(entity))
+
+        # >>> EKLENEN KISIM: kendi grubunu (kurucusu olduğun) atla <<<
+        if getattr(entity, "creator", False):
+            logging.info(f"Skipping own group: {chat_title} (id={getattr(entity, 'id', 'unknown')})")
+            continue
+        # >>> EKLENEN KISIM SONU <<<
+
         logging.info(f"Scanning group: {chat_title} (id={getattr(entity, 'id', 'unknown')})")
 
         try:
